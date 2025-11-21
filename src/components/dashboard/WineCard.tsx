@@ -1,18 +1,25 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Wine as WineIcon, Edit } from "lucide-react";
+import { Wine as WineIcon, Edit, Trash2, Sparkles } from "lucide-react";
 import { Wine } from "@/types/wine";
 
 interface WineCardProps {
   wine: Wine;
   onEdit: (wine: Wine) => void;
+  onDelete: (id: string) => void;
 }
 
 const categoryColors = {
   espumantes: "champagne-gradient",
-  brancos: "bg-secondary",
+  brancos: "white-wine-gradient",
   rose: "rose-gradient",
+};
+
+const categoryIcons = {
+  espumantes: Sparkles,
+  brancos: WineIcon,
+  rose: WineIcon,
 };
 
 const categoryLabels = {
@@ -21,12 +28,14 @@ const categoryLabels = {
   rose: "Vinho Rosé",
 };
 
-export const WineCard = ({ wine, onEdit }: WineCardProps) => {
+export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
+  const CategoryIcon = categoryIcons[wine.category];
+  
   return (
     <Card className="glass-card hover-lift smooth-transition p-5 group">
       <div className="flex items-start gap-4">
         <div className={`p-3 rounded-lg ${categoryColors[wine.category]} flex-shrink-0`}>
-          <WineIcon className="h-5 w-5 group-hover:scale-110 transition-transform" />
+          <CategoryIcon className="h-5 w-5 group-hover:scale-110 transition-transform" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2 mb-2">
@@ -51,15 +60,25 @@ export const WineCard = ({ wine, onEdit }: WineCardProps) => {
                 <span className="font-medium">{wine.price.toFixed(2)}</span>
               </div>
             </div>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => onEdit(wine)}
-              className="h-7 px-2"
-            >
-              <Edit className="h-3 w-3 mr-1" />
-              Editar
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => onEdit(wine)}
+                className="h-7 px-2"
+              >
+                <Edit className="h-3 w-3 mr-1" />
+                Editar
+              </Button>
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => onDelete(wine.id)}
+                className="h-7 px-2"
+              >
+                <Trash2 className="h-3 w-3" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
