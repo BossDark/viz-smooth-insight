@@ -57,6 +57,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        burgundy: {
+          DEFAULT: "hsl(var(--burgundy))",
+          light: "hsl(var(--burgundy-light))",
+        },
+        rose: "hsl(var(--rose))",
+        champagne: "hsl(var(--champagne))",
+        "wine-deep": "hsl(var(--wine-deep))",
       },
       borderRadius: {
         lg: "var(--radius)",
