@@ -4,17 +4,20 @@ import { Wine } from "@/types/wine";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { WineCard } from "@/components/dashboard/WineCard";
 import { EditWineDialog } from "@/components/dashboard/EditWineDialog";
+import { AddWineDialog } from "@/components/dashboard/AddWineDialog";
 import { CategoryChart } from "@/components/dashboard/CategoryChart";
 import { SearchBar } from "@/components/dashboard/SearchBar";
 import { CategoryFilter } from "@/components/dashboard/CategoryFilter";
-import { Wine as WineIcon, Sparkles, Droplets, Package } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Wine as WineIcon, Sparkles, Droplets, Package, Plus } from "lucide-react";
 
 const Index = () => {
   const [wines, setWines] = useState<Wine[]>(initialWines);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Wine["category"] | "all">("all");
   const [editingWine, setEditingWine] = useState<Wine | null>(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [addDialogOpen, setAddDialogOpen] = useState(false);
 
   const filteredWines = useMemo(() => {
     return wines.filter((wine) => {
@@ -24,7 +27,7 @@ const Index = () => {
       const matchesCategory = selectedCategory === "all" || wine.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [wines, searchQuery, selectedCategory]);
 
   const categoryStats = useMemo(() => {
     const espumantes = wines.filter((w) => w.category === "espumantes").length;
@@ -40,11 +43,19 @@ const Index = () => {
 
   const handleEditWine = (wine: Wine) => {
     setEditingWine(wine);
-    setDialogOpen(true);
+    setEditDialogOpen(true);
   };
 
   const handleSaveWine = (updatedWine: Wine) => {
     setWines(wines.map((w) => (w.id === updatedWine.id ? updatedWine : w)));
+  };
+
+  const handleAddWine = (newWine: Wine) => {
+    setWines([...wines, newWine]);
+  };
+
+  const handleDeleteWine = (id: string) => {
+    setWines(wines.filter((w) => w.id !== id));
   };
 
   return (
@@ -102,20 +113,31 @@ const Index = () => {
             <h2 className="text-2xl font-bold">
               Produtos {selectedCategory !== "all" && `- ${selectedCategory}`}
             </h2>
-            <p className="text-muted-foreground">
-              {filteredWines.length} {filteredWines.length === 1 ? "produto" : "produtos"}
-            </p>
+            <div className="flex items-center gap-4">
+              <p className="text-muted-foreground">
+                {filteredWines.length} {filteredWines.length === 1 ? "produto" : "produtos"}
+              </p>
+              <Button onClick={() => setAddDialogOpen(true)} className="gap-2">
+                <Plus className="h-4 w-4" />
+                Adicionar Produto
+              </Button>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredWines.map((wine) => (
-              <WineCard key={wine.id} wine={wine} onEdit={handleEditWine} />
+              <WineCard key={wine.id} wine={wine} onEdit={handleEditWine} onDelete={handleDeleteWine} />
             ))}
           </div>
           <EditWineDialog
             wine={editingWine}
-            open={dialogOpen}
-            onOpenChange={setDialogOpen}
+            open={editDialogOpen}
+            onOpenChange={setEditDialogOpen}
             onSave={handleSaveWine}
+          />
+          <AddWineDialog
+            open={addDialogOpen}
+            onOpenChange={setAddDialogOpen}
+            onAdd={handleAddWine}
           />
           {filteredWines.length === 0 && (
             <div className="text-center py-12 glass-card rounded-xl">

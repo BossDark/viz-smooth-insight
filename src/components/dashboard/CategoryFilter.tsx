@@ -9,7 +9,7 @@ interface CategoryFilterProps {
 const categories = [
   { value: "all" as const, label: "Todos", color: "wine-gradient" },
   { value: "espumantes" as const, label: "Espumantes", color: "champagne-gradient" },
-  { value: "brancos" as const, label: "Brancos", color: "bg-secondary" },
+  { value: "brancos" as const, label: "Brancos", color: "white-wine-gradient" },
   { value: "rose" as const, label: "Rosés", color: "rose-gradient" },
 ];
 
