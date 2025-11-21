@@ -3,6 +3,8 @@ export interface Wine {
   code: string;
   name: string;
   category: "espumantes" | "brancos" | "rose";
+  quantity: number;
+  price: number;
 }
 
 export interface CategoryStats {
