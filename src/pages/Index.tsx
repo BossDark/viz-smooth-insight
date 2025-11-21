@@ -1,16 +1,20 @@
 import { useState, useMemo } from "react";
-import { wines } from "@/data/wines";
+import { wines as initialWines } from "@/data/wines";
 import { Wine } from "@/types/wine";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { WineCard } from "@/components/dashboard/WineCard";
+import { EditWineDialog } from "@/components/dashboard/EditWineDialog";
 import { CategoryChart } from "@/components/dashboard/CategoryChart";
 import { SearchBar } from "@/components/dashboard/SearchBar";
 import { CategoryFilter } from "@/components/dashboard/CategoryFilter";
 import { Wine as WineIcon, Sparkles, Droplets, Package } from "lucide-react";
 
 const Index = () => {
+  const [wines, setWines] = useState<Wine[]>(initialWines);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Wine["category"] | "all">("all");
+  const [editingWine, setEditingWine] = useState<Wine | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const filteredWines = useMemo(() => {
     return wines.filter((wine) => {
@@ -32,7 +36,16 @@ const Index = () => {
       { category: "Brancos", count: brancos, color: "hsl(210, 40%, 96.1%)" },
       { category: "Rosés", count: rose, color: "hsl(350, 70%, 75%)" },
     ];
-  }, []);
+  }, [wines]);
+
+  const handleEditWine = (wine: Wine) => {
+    setEditingWine(wine);
+    setDialogOpen(true);
+  };
+
+  const handleSaveWine = (updatedWine: Wine) => {
+    setWines(wines.map((w) => (w.id === updatedWine.id ? updatedWine : w)));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-accent/30 to-background p-6">
@@ -95,9 +108,15 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredWines.map((wine) => (
-              <WineCard key={wine.id} wine={wine} />
+              <WineCard key={wine.id} wine={wine} onEdit={handleEditWine} />
             ))}
           </div>
+          <EditWineDialog
+            wine={editingWine}
+            open={dialogOpen}
+            onOpenChange={setDialogOpen}
+            onSave={handleSaveWine}
+          />
           {filteredWines.length === 0 && (
             <div className="text-center py-12 glass-card rounded-xl">
               <WineIcon className="h-12 w-12 mx-auto text-muted-foreground mb-4 opacity-50" />
