@@ -23,10 +23,10 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
   const [code, setCode] = useState("");
   const [category, setCategory] = useState<Wine["category"]>("brancos");
   const [quantity, setQuantity] = useState("");
-  const [price, setPrice] = useState("");
+  const [minStock, setMinStock] = useState("");
 
   const handleSave = () => {
-    if (!name || !code || !quantity || !price) return;
+    if (!name || !code || !quantity || !minStock) return;
 
     const newWine: Wine = {
       id: Date.now().toString(),
@@ -34,7 +34,7 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
       code,
       category,
       quantity: parseInt(quantity),
-      price: parseFloat(price),
+      minStock: parseInt(minStock),
     };
 
     onAdd(newWine);
@@ -44,7 +44,7 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
     setCode("");
     setCategory("brancos");
     setQuantity("");
-    setPrice("");
+    setMinStock("");
     onOpenChange(false);
   };
 
@@ -97,14 +97,13 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="price">Preço (R$)</Label>
+            <Label htmlFor="minStock">Estoque Mínimo</Label>
             <Input
-              id="price"
+              id="minStock"
               type="number"
-              step="0.01"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              placeholder="0.00"
+              value={minStock}
+              onChange={(e) => setMinStock(e.target.value)}
+              placeholder="0"
             />
           </div>
         </div>

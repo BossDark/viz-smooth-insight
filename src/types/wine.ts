@@ -4,7 +4,7 @@ export interface Wine {
   name: string;
   category: "espumantes" | "brancos" | "rose";
   quantity: number;
-  price: number;
+  minStock: number;
 }
 
 export interface CategoryStats {
