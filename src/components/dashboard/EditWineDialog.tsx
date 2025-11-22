@@ -22,28 +22,28 @@ interface EditWineDialogProps {
 
 export const EditWineDialog = ({ wine, open, onOpenChange, onSave }: EditWineDialogProps) => {
   const [quantity, setQuantity] = useState(wine?.quantity.toString() || "0");
-  const [price, setPrice] = useState(wine?.price.toString() || "0");
+  const [minStock, setMinStock] = useState(wine?.minStock.toString() || "0");
 
   const handleSave = () => {
     if (!wine) return;
 
     const quantityNum = parseInt(quantity);
-    const priceNum = parseFloat(price);
+    const minStockNum = parseInt(minStock);
 
     if (isNaN(quantityNum) || quantityNum < 0) {
       toast.error("Quantidade inválida");
       return;
     }
 
-    if (isNaN(priceNum) || priceNum < 0) {
-      toast.error("Preço inválido");
+    if (isNaN(minStockNum) || minStockNum < 0) {
+      toast.error("Estoque mínimo inválido");
       return;
     }
 
     onSave({
       ...wine,
       quantity: quantityNum,
-      price: priceNum,
+      minStock: minStockNum,
     });
 
     toast.success("Produto atualizado com sucesso!");
@@ -58,7 +58,7 @@ export const EditWineDialog = ({ wine, open, onOpenChange, onSave }: EditWineDia
         <DialogHeader>
           <DialogTitle>Editar Produto</DialogTitle>
           <DialogDescription>
-            Atualize a quantidade e o preço de <strong>{wine.name}</strong>
+            Atualize a quantidade e o estoque mínimo de <strong>{wine.name}</strong>
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -74,15 +74,14 @@ export const EditWineDialog = ({ wine, open, onOpenChange, onSave }: EditWineDia
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="price">Preço (R$)</Label>
+            <Label htmlFor="minStock">Estoque Mínimo</Label>
             <Input
-              id="price"
+              id="minStock"
               type="number"
               min="0"
-              step="0.01"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              placeholder="Ex: 89.90"
+              value={minStock}
+              onChange={(e) => setMinStock(e.target.value)}
+              placeholder="Ex: 20"
             />
           </div>
         </div>

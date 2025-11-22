@@ -56,8 +56,8 @@ export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
                 <span className="font-medium">{wine.quantity}</span>
               </div>
               <div>
-                <span className="text-muted-foreground">R$ </span>
-                <span className="font-medium">{wine.price.toFixed(2)}</span>
+                <span className="text-muted-foreground">Estoque Mín: </span>
+                <span className="font-medium">{wine.minStock}</span>
               </div>
             </div>
             <div className="flex gap-2">

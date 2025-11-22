@@ -6,6 +6,7 @@ import { WineCard } from "@/components/dashboard/WineCard";
 import { EditWineDialog } from "@/components/dashboard/EditWineDialog";
 import { AddWineDialog } from "@/components/dashboard/AddWineDialog";
 import { CategoryChart } from "@/components/dashboard/CategoryChart";
+import { QuantityChart } from "@/components/dashboard/QuantityChart";
 import { SearchBar } from "@/components/dashboard/SearchBar";
 import { CategoryFilter } from "@/components/dashboard/CategoryFilter";
 import { Button } from "@/components/ui/button";
@@ -96,9 +97,10 @@ const Index = () => {
           />
         </div>
 
-        {/* Chart */}
-        <div className="animate-fade-in">
+        {/* Charts */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-fade-in">
           <CategoryChart data={categoryStats} />
+          <QuantityChart wines={wines} />
         </div>
 
         {/* Filters */}
