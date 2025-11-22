@@ -41,7 +41,7 @@ const Index = () => {
 
     return [
       { category: "Espumantes", count: espumantes, color: "hsl(40, 80%, 85%)" },
-      { category: "Brancos", count: brancos, color: "hsl(210, 40%, 96.1%)" },
+      { category: "Brancos", count: brancos, color: "hsl(60, 40%, 85%)" },
       { category: "Rosés", count: rose, color: "hsl(350, 70%, 75%)" },
     ];
   }, [wines]);
