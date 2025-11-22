@@ -10,7 +10,7 @@ import { QuantityChart } from "@/components/dashboard/QuantityChart";
 import { SearchBar } from "@/components/dashboard/SearchBar";
 import { CategoryFilter } from "@/components/dashboard/CategoryFilter";
 import { Button } from "@/components/ui/button";
-import { Wine as WineIcon, Sparkles, Droplets, Package, Plus } from "lucide-react";
+import { Wine as WineIcon, Sparkles, Droplets, Package, Plus, BarChart3 } from "lucide-react";
 
 const Index = () => {
   const [wines, setWines] = useState<Wine[]>(initialWines);
@@ -29,6 +29,10 @@ const Index = () => {
       return matchesSearch && matchesCategory;
     });
   }, [wines, searchQuery, selectedCategory]);
+
+  const totalQuantity = useMemo(() => {
+    return wines.reduce((sum, wine) => sum + wine.quantity, 0);
+  }, [wines]);
 
   const categoryStats = useMemo(() => {
     const espumantes = wines.filter((w) => w.category === "espumantes").length;
@@ -76,11 +80,17 @@ const Index = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-scale-in">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-scale-in">
           <StatsCard
             title="Total de Produtos"
             value={wines.length}
             icon={Package}
+            gradient="wine-gradient"
+          />
+          <StatsCard
+            title="Quantidade Total"
+            value={totalQuantity}
+            icon={BarChart3}
             gradient="wine-gradient"
           />
           <StatsCard
