@@ -21,8 +21,8 @@ interface EditWineDialogProps {
 }
 
 export const EditWineDialog = ({ wine, open, onOpenChange, onSave }: EditWineDialogProps) => {
-  const [quantity, setQuantity] = useState(wine?.quantity.toString() || "0");
-  const [minStock, setMinStock] = useState(wine?.minStock.toString() || "0");
+  const [quantity, setQuantity] = useState(wine ? wine.quantity.toString() : "0");
+  const [minStock, setMinStock] = useState(wine ? wine.minStock.toString() : "0");
 
   const handleSave = () => {
     if (!wine) return;
