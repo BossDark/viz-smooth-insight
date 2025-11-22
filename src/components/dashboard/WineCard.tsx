@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Wine as WineIcon, Edit, Trash2, Sparkles } from "lucide-react";
+import { Wine as WineIcon, Edit, Trash2, Sparkles, AlertTriangle } from "lucide-react";
 import { Wine } from "@/types/wine";
 
 interface WineCardProps {
@@ -30,6 +30,8 @@ const categoryLabels = {
 
 export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
   const CategoryIcon = categoryIcons[wine.category];
+  const isLowStock = wine.quantity < wine.minStock;
+  const isCriticalStock = wine.quantity <= wine.minStock * 0.5;
   
   return (
     <Card className="glass-card hover-lift smooth-transition p-5 group">
@@ -42,9 +44,23 @@ export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
             <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
               {wine.name}
             </h3>
-            <Badge variant="outline" className="flex-shrink-0 text-xs">
-              {wine.code}
-            </Badge>
+            <div className="flex gap-2 flex-shrink-0">
+              <Badge variant="outline" className="text-xs">
+                {wine.code}
+              </Badge>
+              {isCriticalStock && (
+                <Badge variant="destructive" className="text-xs gap-1">
+                  <AlertTriangle className="h-3 w-3" />
+                  Crítico
+                </Badge>
+              )}
+              {isLowStock && !isCriticalStock && (
+                <Badge className="text-xs bg-orange-500 hover:bg-orange-600 gap-1">
+                  <AlertTriangle className="h-3 w-3" />
+                  Baixo
+                </Badge>
+              )}
+            </div>
           </div>
           <p className="text-xs text-muted-foreground mb-3">
             {categoryLabels[wine.category]}
