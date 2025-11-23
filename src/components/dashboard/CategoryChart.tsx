@@ -27,7 +27,6 @@ export const CategoryChart = ({ data }: CategoryChartProps) => {
             ))}
           </Pie>
           <Tooltip />
-          <Legend />
         </PieChart>
       </ResponsiveContainer>
     </Card>
