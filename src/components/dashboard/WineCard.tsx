@@ -14,18 +14,21 @@ const categoryColors = {
   espumantes: "champagne-gradient",
   brancos: "white-wine-gradient",
   rose: "rose-gradient",
+  tintos: "red-wine-gradient",
 };
 
 const categoryIcons = {
   espumantes: Sparkles,
   brancos: WineIcon,
   rose: WineIcon,
+  tintos: WineIcon,
 };
 
 const categoryLabels = {
   espumantes: "Espumante",
   brancos: "Vinho Branco",
   rose: "Vinho Rosé",
+  tintos: "Vinho Tinto",
 };
 
 export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {

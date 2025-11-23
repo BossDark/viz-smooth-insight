@@ -18,9 +18,10 @@ export default {
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
   			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			'white-wine': 'hsl(var(--white-wine))',
-  			primary: {
+			foreground: 'hsl(var(--foreground))',
+			'white-wine': 'hsl(var(--white-wine))',
+			'red-wine': 'hsl(var(--red-wine))',
+			primary: {
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},

@@ -9,7 +9,7 @@ interface CategoryChartProps {
 export const CategoryChart = ({ data }: CategoryChartProps) => {
   return (
     <Card className="glass-card p-6">
-      <h2 className="text-xl font-bold mb-6">Distribuição por Categoria</h2>
+      <h2 className="text-xl font-bold mb-6 text-black dark:text-white">Distribuição por Categoria</h2>
       <ResponsiveContainer width="100%" height={300}>
         <PieChart>
           <Pie

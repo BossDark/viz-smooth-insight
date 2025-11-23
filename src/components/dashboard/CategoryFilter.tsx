@@ -11,6 +11,7 @@ const categories = [
   { value: "espumantes" as const, label: "Espumantes", color: "champagne-gradient" },
   { value: "brancos" as const, label: "Brancos", color: "white-wine-gradient" },
   { value: "rose" as const, label: "Rosés", color: "rose-gradient" },
+  { value: "tintos" as const, label: "Tintos", color: "red-wine-gradient" },
 ];
 
 export const CategoryFilter = ({ selected, onSelect }: CategoryFilterProps) => {
