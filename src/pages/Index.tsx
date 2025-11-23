@@ -110,7 +110,7 @@ const Index = () => {
         </div>
 
         {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-fade-in">
+        <div className="grid grid-cols-1 gap-6 animate-fade-in max-w-3xl mx-auto">
           <CategoryChart data={categoryStats} />
           <QuantityChart wines={wines} />
         </div>
