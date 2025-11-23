@@ -14,7 +14,7 @@ export const QuantityChart = ({ wines }: QuantityChartProps) => {
   }));
 
   return (
-    <Card className="glass-card p-6">
+    <Card className="glass-card p-6 animate-fade-in">
       <h2 className="text-xl font-bold mb-6">Distribuição de Quantidades</h2>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart data={data}>
@@ -33,10 +33,26 @@ export const QuantityChart = ({ wines }: QuantityChartProps) => {
               border: '1px solid hsl(var(--border))',
               borderRadius: '8px'
             }}
+            animationDuration={300}
+            animationEasing="ease-out"
           />
           <Legend />
-          <Bar dataKey="quantidade" fill="hsl(var(--primary))" name="Quantidade Atual" />
-          <Bar dataKey="minimo" fill="hsl(var(--muted))" name="Estoque Mínimo" />
+          <Bar 
+            dataKey="quantidade" 
+            fill="hsl(var(--primary))" 
+            name="Quantidade Atual"
+            animationBegin={0}
+            animationDuration={800}
+            animationEasing="ease-out"
+          />
+          <Bar 
+            dataKey="minimo" 
+            fill="hsl(var(--muted))" 
+            name="Estoque Mínimo"
+            animationBegin={200}
+            animationDuration={800}
+            animationEasing="ease-out"
+          />
         </BarChart>
       </ResponsiveContainer>
     </Card>
