@@ -16,7 +16,7 @@ export const QuantityChart = ({ wines }: QuantityChartProps) => {
   return (
     <Card className="glass-card p-6">
       <h2 className="text-xl font-bold mb-6">Distribuição de Quantidades</h2>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={500}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
           <XAxis 

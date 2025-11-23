@@ -38,11 +38,13 @@ const Index = () => {
     const espumantes = wines.filter((w) => w.category === "espumantes").length;
     const brancos = wines.filter((w) => w.category === "brancos").length;
     const rose = wines.filter((w) => w.category === "rose").length;
+    const tintos = wines.filter((w) => w.category === "tintos").length;
 
     return [
       { category: "Espumantes", count: espumantes, color: "hsl(40, 80%, 85%)" },
       { category: "Brancos", count: brancos, color: "hsl(60, 40%, 85%)" },
       { category: "Rosés", count: rose, color: "hsl(350, 70%, 75%)" },
+      { category: "Tintos", count: tintos, color: "hsl(0, 60%, 45%)" },
     ];
   }, [wines]);
 

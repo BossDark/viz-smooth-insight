@@ -83,6 +83,7 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
                 <SelectItem value="espumantes">Espumante</SelectItem>
                 <SelectItem value="brancos">Vinho Branco</SelectItem>
                 <SelectItem value="rose">Vinho Rosé</SelectItem>
+                <SelectItem value="tintos">Vinho Tinto</SelectItem>
               </SelectContent>
             </Select>
           </div>
