@@ -8,9 +8,12 @@ interface CategoryChartProps {
 
 export const CategoryChart = ({ data }: CategoryChartProps) => {
   return (
-    <Card className="glass-card p-6 animate-fade-in">
-      <h2 className="text-xl font-bold mb-6 text-black dark:text-white">Distribuição por Categoria</h2>
-      <ResponsiveContainer width="100%" height={250}>
+    <Card className="glass-card animate-fade-in overflow-hidden">
+      <div className="p-6 pb-0">
+        <h2 className="text-xl font-bold mb-6 text-black dark:text-white">Distribuição por Categoria</h2>
+      </div>
+      <div className="px-2 pb-4">
+        <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie
             data={data}
@@ -35,6 +38,7 @@ export const CategoryChart = ({ data }: CategoryChartProps) => {
           />
         </PieChart>
       </ResponsiveContainer>
+      </div>
     </Card>
   );
 };
