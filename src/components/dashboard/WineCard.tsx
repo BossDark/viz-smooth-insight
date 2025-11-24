@@ -37,14 +37,14 @@ export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
   const isCriticalStock = wine.quantity <= wine.minStock * 0.5;
   
   return (
-    <Card className="glass-card hover-lift smooth-transition p-5 group">
+    <Card className="glass-card hover-lift smooth-transition p-5 group hover:shadow-xl hover:border-primary/30 cursor-pointer">
       <div className="flex items-start gap-4">
-        <div className={`p-3 rounded-lg ${categoryColors[wine.category]} flex-shrink-0`}>
-          <CategoryIcon className="h-5 w-5 group-hover:scale-110 transition-transform" />
+        <div className={`p-3 rounded-lg ${categoryColors[wine.category]} flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+          <CategoryIcon className="h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2 mb-2">
-            <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
+            <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-2">
               {wine.name}
             </h3>
             <div className="flex gap-2 flex-shrink-0">
@@ -79,12 +79,12 @@ export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
                 <span className="font-medium">{wine.minStock}</span>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
               <Button
                 size="sm"
                 variant="outline"
                 onClick={() => onEdit(wine)}
-                className="h-7 px-2"
+                className="h-7 px-2 hover:scale-105 transition-transform"
               >
                 <Edit className="h-3 w-3 mr-1" />
                 Editar
@@ -93,7 +93,7 @@ export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
                 size="sm"
                 variant="destructive"
                 onClick={() => onDelete(wine.id)}
-                className="h-7 px-2"
+                className="h-7 px-2 hover:scale-105 transition-transform"
               >
                 <Trash2 className="h-3 w-3" />
               </Button>
