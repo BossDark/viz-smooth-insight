@@ -14,9 +14,12 @@ export const QuantityChart = ({ wines }: QuantityChartProps) => {
   }));
 
   return (
-    <Card className="glass-card p-6 animate-fade-in">
-      <h2 className="text-xl font-bold mb-6">Distribuição de Quantidades</h2>
-      <ResponsiveContainer width="100%" height={400}>
+    <Card className="glass-card animate-fade-in overflow-hidden">
+      <div className="p-6 pb-0">
+        <h2 className="text-xl font-bold mb-6">Distribuição de Quantidades</h2>
+      </div>
+      <div className="px-2 pb-4">
+        <ResponsiveContainer width="100%" height={400}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
           <XAxis 
@@ -55,6 +58,7 @@ export const QuantityChart = ({ wines }: QuantityChartProps) => {
           />
         </BarChart>
       </ResponsiveContainer>
+      </div>
     </Card>
   );
 };
