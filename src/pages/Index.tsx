@@ -9,6 +9,7 @@ import { CategoryChart } from "@/components/dashboard/CategoryChart";
 import { QuantityChart } from "@/components/dashboard/QuantityChart";
 import { SearchBar } from "@/components/dashboard/SearchBar";
 import { CategoryFilter } from "@/components/dashboard/CategoryFilter";
+import { WarehouseFilter } from "@/components/dashboard/WarehouseFilter";
 import { Button } from "@/components/ui/button";
 import { Wine as WineIcon, Sparkles, Droplets, Package, Plus, BarChart3 } from "lucide-react";
 
@@ -16,6 +17,7 @@ const Index = () => {
   const [wines, setWines] = useState<Wine[]>(initialWines);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Wine["category"] | "all">("all");
+  const [selectedWarehouse, setSelectedWarehouse] = useState<Wine["warehouse"] | "all">("all");
   const [editingWine, setEditingWine] = useState<Wine | null>(null);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [addDialogOpen, setAddDialogOpen] = useState(false);
@@ -26,9 +28,10 @@ const Index = () => {
         wine.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         wine.code.includes(searchQuery);
       const matchesCategory = selectedCategory === "all" || wine.category === selectedCategory;
-      return matchesSearch && matchesCategory;
+      const matchesWarehouse = selectedWarehouse === "all" || wine.warehouse === selectedWarehouse;
+      return matchesSearch && matchesCategory && matchesWarehouse;
     });
-  }, [wines, searchQuery, selectedCategory]);
+  }, [wines, searchQuery, selectedCategory, selectedWarehouse]);
 
   const totalQuantity = useMemo(() => {
     return wines.reduce((sum, wine) => sum + wine.quantity, 0);
@@ -119,6 +122,7 @@ const Index = () => {
         <div className="space-y-4 glass-card p-6 rounded-xl animate-fade-in">
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
           <CategoryFilter selected={selectedCategory} onSelect={setSelectedCategory} />
+          <WarehouseFilter selected={selectedWarehouse} onSelect={setSelectedWarehouse} />
         </div>
 
         {/* Wine Grid */}

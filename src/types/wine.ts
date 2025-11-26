@@ -3,6 +3,7 @@ export interface Wine {
   code: string;
   name: string;
   category: "espumantes" | "brancos" | "rose" | "tintos";
+  warehouse: "deposito-1" | "deposito-2";
   quantity: number;
   minStock: number;
 }
