@@ -31,6 +31,11 @@ const categoryLabels = {
   tintos: "Vinho Tinto",
 };
 
+const warehouseLabels = {
+  "deposito-1": "Depósito 1",
+  "deposito-2": "Depósito 2",
+};
+
 export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
   const CategoryIcon = categoryIcons[wine.category];
   const isLowStock = wine.quantity < wine.minStock;
@@ -66,7 +71,7 @@ export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
             </div>
           </div>
           <p className="text-xs text-muted-foreground mb-3">
-            {categoryLabels[wine.category]}
+            {categoryLabels[wine.category]} • {warehouseLabels[wine.warehouse]}
           </p>
           <div className="flex items-center justify-between gap-2">
             <div className="flex gap-4 text-sm">

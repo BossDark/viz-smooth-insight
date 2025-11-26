@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Wine } from "@/types/wine";
 import {
   Dialog,
@@ -11,6 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 
 interface EditWineDialogProps {
@@ -23,6 +24,16 @@ interface EditWineDialogProps {
 export const EditWineDialog = ({ wine, open, onOpenChange, onSave }: EditWineDialogProps) => {
   const [quantity, setQuantity] = useState(wine ? wine.quantity.toString() : "0");
   const [minStock, setMinStock] = useState(wine ? wine.minStock.toString() : "0");
+  const [warehouse, setWarehouse] = useState<Wine["warehouse"]>(wine ? wine.warehouse : "deposito-1");
+
+  // Update state when wine changes
+  useEffect(() => {
+    if (wine) {
+      setQuantity(wine.quantity.toString());
+      setMinStock(wine.minStock.toString());
+      setWarehouse(wine.warehouse);
+    }
+  }, [wine]);
 
   const handleSave = () => {
     if (!wine) return;
@@ -42,6 +53,7 @@ export const EditWineDialog = ({ wine, open, onOpenChange, onSave }: EditWineDia
 
     onSave({
       ...wine,
+      warehouse,
       quantity: quantityNum,
       minStock: minStockNum,
     });
@@ -62,6 +74,18 @@ export const EditWineDialog = ({ wine, open, onOpenChange, onSave }: EditWineDia
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
+          <div className="grid gap-2">
+            <Label htmlFor="warehouse">Depósito</Label>
+            <Select value={warehouse} onValueChange={(value) => setWarehouse(value as Wine["warehouse"])}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="deposito-1">Depósito 1</SelectItem>
+                <SelectItem value="deposito-2">Depósito 2</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
           <div className="grid gap-2">
             <Label htmlFor="quantity">Quantidade em Estoque</Label>
             <Input

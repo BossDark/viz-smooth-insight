@@ -22,6 +22,7 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const [category, setCategory] = useState<Wine["category"]>("brancos");
+  const [warehouse, setWarehouse] = useState<Wine["warehouse"]>("deposito-1");
   const [quantity, setQuantity] = useState("");
   const [minStock, setMinStock] = useState("");
 
@@ -33,6 +34,7 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
       name,
       code,
       category,
+      warehouse,
       quantity: parseInt(quantity),
       minStock: parseInt(minStock),
     };
@@ -43,6 +45,7 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
     setName("");
     setCode("");
     setCategory("brancos");
+    setWarehouse("deposito-1");
     setQuantity("");
     setMinStock("");
     onOpenChange(false);
@@ -84,6 +87,18 @@ export const AddWineDialog = ({ open, onOpenChange, onAdd }: AddWineDialogProps)
                 <SelectItem value="brancos">Vinho Branco</SelectItem>
                 <SelectItem value="rose">Vinho Rosé</SelectItem>
                 <SelectItem value="tintos">Vinho Tinto</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="warehouse">Depósito</Label>
+            <Select value={warehouse} onValueChange={(value) => setWarehouse(value as Wine["warehouse"])}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="deposito-1">Depósito 1</SelectItem>
+                <SelectItem value="deposito-2">Depósito 2</SelectItem>
               </SelectContent>
             </Select>
           </div>
