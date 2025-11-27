@@ -31,10 +31,10 @@ const categoryLabels = {
   tintos: "Vinho Tinto",
 };
 
-const warehouseLabels = {
-  "deposito-1": "Depósito 1",
-  "deposito-2": "Depósito 2",
-};
+  const warehouseLabels = {
+    "deposito-1": "Rancho/Ondas",
+    "deposito-2": "Vitória",
+  };
 
 export const WineCard = ({ wine, onEdit, onDelete }: WineCardProps) => {
   const CategoryIcon = categoryIcons[wine.category];

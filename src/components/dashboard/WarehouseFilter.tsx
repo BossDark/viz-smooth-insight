@@ -10,8 +10,8 @@ interface WarehouseFilterProps {
 export const WarehouseFilter = ({ selected, onSelect }: WarehouseFilterProps) => {
   const warehouses: { value: Wine["warehouse"] | "all"; label: string }[] = [
     { value: "all", label: "Todos os Depósitos" },
-    { value: "deposito-1", label: "Depósito 1" },
-    { value: "deposito-2", label: "Depósito 2" },
+    { value: "deposito-1", label: "Rancho/Ondas" },
+    { value: "deposito-2", label: "Vitória" },
   ];
 
   return (
